@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ContriesCard from './ContriesCard';
 
 function Contries() {
-    const API_ENDPOINT = "https://xcountries-backend.azurewebsites.net/all";
+    const API_ENDPOINT = "https://xcountries-backend.azurewebsites.net/alls";
     const [flags, setFlags] = useState([]);
 
     // console.log({flags});
@@ -11,7 +11,17 @@ function Contries() {
         fetch(API_ENDPOINT)
         .then((res)=>res.json())
         .then((data) => setFlags(data))
-        .catch((error) => console.error("error feching data: ",error));
+        .catch((error) => {
+            if (typeof error.json === "function") {
+                error.json().then(jsonError => {
+                    console.error("error feching data: ",jsonError);
+                }).catch(genericError => {
+                    console.error("error feching data: ",error.statusText);
+                });
+            } else {
+                console.log("error feching data: ",error);
+            }
+        });
     },[]);
 
 
