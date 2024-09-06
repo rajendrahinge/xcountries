@@ -11,11 +11,11 @@ function Contries() {
         fetch(API_ENDPOINT)
         .then((res)=>res.json())
         .then((data) => setFlags(data))
-        .catch((error) => console.log("error feching data: ",error));
+        .catch((error) => console.error("error feching data: ",error));
     },[]);
 
 
-    
+
     return <div style={{
         display:"flex",
         flexWrap:"wrap"
