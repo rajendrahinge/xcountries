@@ -13,8 +13,8 @@ function Contries() {
         .then((res)=>res.json())
         .then((data) => setFlags(data))
         .catch((error) => {
-            setError(error.message);
-            console.error(error);
+            setError('Error fetching data: '+ error.message);
+            console.error('Error fetching data: '+ error.message);
         });
     },[]);
 
